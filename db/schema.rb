@@ -14,7 +14,7 @@ ActiveRecord::Schema.define(version: 2020_02_10_232214) do
 
   create_table "availabilities", force: :cascade do |t|
     t.integer "campground_id"
-    t.datetime "date"
+    t.date "date"
     t.boolean "open?"
     t.integer "sites_available"
   end
