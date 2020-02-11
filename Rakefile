@@ -1,5 +1,6 @@
 require_relative 'config/environment'
 require 'sinatra/activerecord/rake'
+require 'date'
 
 desc 'starts a console'
 task :console do
@@ -7,7 +8,3 @@ task :console do
   Pry.start
 end
 
-desc "Seeds the DB"
-task :seed do 
-    sh 'ruby db/seeds.rb'
-end
