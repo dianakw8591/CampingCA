@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_10_232214) do
+ActiveRecord::Schema.define(version: 2020_02_12_165626) do
+
+  create_table "alerts", force: :cascade do |t|
+    t.integer "campground_id"
+    t.integer "user_id"
+    t.date "start_date"
+    t.date "end_date"
+    t.boolean "has_triggered?", default: false
+  end
 
   create_table "availabilities", force: :cascade do |t|
     t.integer "campground_id"
@@ -24,11 +32,6 @@ ActiveRecord::Schema.define(version: 2020_02_10_232214) do
     t.integer "official_facility_id"
     t.string "description"
     t.integer "rec_area_id"
-  end
-
-  create_table "favorites", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "campground_id"
   end
 
   create_table "rec_areas", force: :cascade do |t|
