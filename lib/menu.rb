@@ -5,7 +5,7 @@ class Menu
         self.welcome
         user = User.prompt_for_user
         self.user = user
-        self.main_menu
+        main_menu
     end
     
     def welcome
@@ -28,7 +28,8 @@ class Menu
         if choice == 1
             explore_rec_areas_menu
         elsif choice == 2
-            campground_find_by_name_menu
+            camp = campground_search_by_name_menu
+            view_campground_details_menu(camp)
         elsif choice == 3
             availability_menu
         elsif choice == 4
@@ -92,8 +93,9 @@ class Menu
         choices = [
             {name: "View description", value: 1}, #PARSE HTML
             {name: "View availability", value: 2},
-            {name: "Return to campgrounds", value: 3},
-            {name: "Return to main menu", value: 4}
+            {name: "View more campgrounds of #{camp.rec_area.name}", value: 3},
+            {name: "Search for campgrounds by name", value: 4},
+            {name: "Return to main menu", value: 5}
         ]
         choice = prompt.select("Select an option:", choices)
         puts "\n\n"
@@ -104,49 +106,43 @@ class Menu
             availability_menu(camp)
         elsif choice == 3
             view_campgrounds_menu(camp.rec_area)
+        elsif choice == 4
+            camp = campground_search_by_name_menu
+            view_campground_details_menu(camp)
         else
             main_menu
         end
     end
 
-    def campground_find_by_name_menu
-        prompt = TTY::Prompt.new
-        camp_name = prompt.ask("Enter a campground name to search:")
-        puts "\n\n"
-        camp = Campground.find_by_name(camp_name)
-        if camp
-            campground_search_menu(camp)
-        else
-            puts "Hmmm, I don't know that one. Please try again.\n\n"
-        end
-    end
-
-    def campground_search_menu(camp)
-        prompt = TTY::Prompt.new
-        puts "#{camp.name}\n\n"
-        choices = [
-            {name: "View description", value: 1}, #PARSE HTML
-            {name: "View availability", value: 2},
-            {name: "Return to search", value: 3},
-            {name: "Return to main menu", value: 4}
-        ]
-        choice = prompt.select("Select an option:", choices)
-        puts "\n\n"
-        if choice == 1
-            puts "#{camp.description}\n\n"
-            campground_search_menu(camp)
-        elsif choice == 2
-            availability_menu(camp)
-        elsif choice == 3
-            campground_find_by_name_menu
-        else
-            main_menu
-        end
-    end
+    # def campground_search_menu(camp)
+    #     prompt = TTY::Prompt.new
+    #     puts "#{camp.name}\n\n"
+    #     choices = [
+    #         {name: "View description", value: 1}, #PARSE HTML
+    #         {name: "View availability", value: 2},
+    #         {name: "Return to search", value: 3},
+    #         {name: "View all of #{camp.rec_area.name}'s campgrounds", value: 4},
+    #         {name: "Return to main menu", value: 5}
+    #     ]
+    #     choice = prompt.select("Select an option:", choices)
+    #     puts "\n\n"
+    #     if choice == 1
+    #         puts "#{camp.description}\n\n"
+    #         campground_search_menu(camp)
+    #     elsif choice == 2
+    #         availability_menu(camp)
+    #     elsif choice == 3
+    #         campground_find_by_name_menu
+    #     elsif choice == 4
+    #         view_campgrounds_menu(camp.rec_area)
+    #     else
+    #         main_menu
+    #     end
+    # end
 
     def availability_menu(camp = nil, date_array = [])
         if camp.nil?
-            camp = select_campground
+            camp = campground_search_by_name_menu
         end
         if date_array.empty?
             date_array = get_dates
@@ -157,7 +153,8 @@ class Menu
             {name: "Change search dates", value: 1},
             {name: "Change campground", value: 2},
             {name: "Set an alert for this search", value: 3},
-            {name: "Return to main menu", value: 4}
+            {name: "View all of #{camp.rec_area.name}'s campgrounds", value: 4},
+            {name: "Return to main menu", value: 5}
         ]
         choice = prompt.select("Select an option:", choices)
         puts "\n\n"
@@ -167,22 +164,43 @@ class Menu
             availability_menu(nil, date_array)
         elsif choice == 3
             alert_menu(camp, date_array)
+        elsif choice == 4
+            view_campgrounds_menu(camp.rec_area)
         else
             main_menu
         end
     end
 
-    def select_campground
+    # def select_campground
+    #     prompt = TTY::Prompt.new
+    #     camp_name = prompt.ask("Enter a campground name to find availability:")
+    #     puts "\n\n"
+    #     camp = Campground.find_by_name(camp_name)
+    #     if camp.nil?
+    #         puts "Hmmm, I don't know that one. Please try again.\n\n"
+    #         self.select_campground
+    #     else
+    #         camp
+    #     end
+    # end
+
+    def campground_search_by_name_menu
         prompt = TTY::Prompt.new
-        camp_name = prompt.ask("Enter a campground name to find availability:")
+        camp_name = prompt.ask("Enter a campground name to search, 'menu' to return to the main menu:")
         puts "\n\n"
-        camp = Campground.find_by_name(camp_name)
-        if camp.nil?
-            puts "Hmmm, I don't know that one. Please try again.\n\n"
-            select_campground
+        if camp_name == "menu"
+            main_menu
+        else
+            camp = Campground.find_by_name(camp_name)
+            if camp.nil?
+                puts "Hmmm, I don't know that one. Please try again.\n\n"
+                campground_search_by_name_menu
+            else
+                camp
+            end
         end
-        camp
     end
+
 
     def get_dates
         start_prompt = TTY::Prompt.new
@@ -291,7 +309,7 @@ class Menu
             puts "Alert updated.\n\n"
             view_alerts_menu
         elsif choice == 2
-            camp = select_campground
+            camp = campground_search_by_name_menu
             alert.update_campground(camp)
             puts "Alert updated.\n\n"
             view_alerts_menu

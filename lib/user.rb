@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
         elsif choice == 3
             delete_user
         else
-            menu.main_menu(self)
+            menu.main_menu
         end
     end
 
