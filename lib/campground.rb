@@ -8,9 +8,6 @@ class Campground < ActiveRecord::Base
         self.find_by(name: name) #NEEDS TO BE CAPITALIZED
     end
 
-    def dates_for_availability(menu, user)
-    end
-
     # get data for availability by date
     def update_availability(start_date, end_date)
         # query rec.gov for campsites
@@ -18,13 +15,24 @@ class Campground < ActiveRecord::Base
     end
 
     def check_availability(start_date, end_date)
+        date_range = []
+        date = start_date
+        while date < end_date do
+            date_range << date
+            date = date.next
+        end
+        date_range.map do |date|
+            {date => sites_available_on_date(date)}
+        end
     end
 
     def sites_available_on_date(date)
-        availabilities.find_by
+        instance = availabilities.find_by(date: date)
+        instance.sites_available
     end
 
-    def set_alert_for_dates(start_date, end_date)
+    def set_alert(date_array, user)
+        Alert.create(user_id: user.id, campground_id: self.id, start_date: date_array[0], end_date: date_array[1])
     end
 
 end

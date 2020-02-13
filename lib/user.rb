@@ -48,6 +48,7 @@ class User < ActiveRecord::Base
         prompt = TTY::Prompt.new
         name = prompt.ask("Please enter a new name:")
         self.name = name
+        self.save
         puts "Name has been updated to #{self.name}"
         puts "\n\n"
         self
@@ -57,6 +58,7 @@ class User < ActiveRecord::Base
         prompt = TTY::Prompt.new
         email = prompt.ask("Please enter a new email address:")
         self.email = email
+        self.save
         puts "Email has been updated to #{self.email}"
         puts "\n\n"
         self
@@ -73,6 +75,12 @@ class User < ActiveRecord::Base
             puts "Goodbye!\n\n"
         else
             update_profile
+        end
+    end
+
+    def selectable_alerts
+        self.alerts.map do |alert| 
+            {name: "#{alert.campground.name} from #{alert.start_date} to #{alert.end_date}", value: alert}
         end
     end
 
