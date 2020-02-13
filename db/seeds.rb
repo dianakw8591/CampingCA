@@ -1,23 +1,25 @@
-# di = User.create(name: "Diana", email: "dianakw@gmail.com")
-# yos = RecArea.create(name: "Yosemite", state_code: "CA", description: "The best!")
-# pines = Campground.new(name: "Lower Pines")
-# fav = Favorite.create(user_id: 1, campground_id: 1)
-# a = Availability.create(date: "2020-02-10")
-
-
 require 'net/http'
 require 'open-uri'
 require 'json'
 require 'date'
 
 RecArea.delete_all
-Campground.delete_all
-Availability.delete_all
- 
-# yosemite = "https://ridb.recreation.gov/api/v1/recareas/2991"
-# upper_pines =   "https://ridb.recreation.gov/api/v1/facilities/232447"
+RecArea.reset_pk_sequence
 
-rec_codes = ["2991", "2782", "2931", "2662"]
+Campground.delete_all
+Campground.reset_pk_sequence
+
+Availability.delete_all
+Availability.reset_pk_sequence
+
+User.delete_all
+User.reset_pk_sequence
+
+Alert.delete_all
+Alert.reset_pk_sequence
+ 
+
+rec_codes = ["2991", "2782", "2931", "2662", "2558", "2631", "2803", "2893", "2901"]
 
 # API request and parsing
 def get_request_for_rec_data(url)
@@ -93,6 +95,3 @@ end
 populate_rec_table(rec_codes)
 populate_campground_table(rec_codes)
 populate_availability_table
-
-
-# binding.pry

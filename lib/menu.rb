@@ -7,6 +7,44 @@ class Menu
         self.user = user
         main_menu
     end
+
+#     def welcome_banner
+
+#        ,gggg,                                                                                                                     
+#      ,88"""Y8b,                                                                                                                  8I 
+#     d8"     `Y8                                                                                                                  8I 
+#    d8'   8b  d8                                                                                                                  8I 
+#   ,8I    "Y88P'                                                                                                                  8I 
+#   I8'             ,gggg,gg   ,ggg,,ggg,,ggg,   gg,gggg,      ,gggg,gg   ,gggggg,    ,ggggg,    gg      gg   ,ggg,,ggg,     ,gggg,8I 
+#   d8             dP"  "Y8I  ,8" "8P" "8P" "8,  I8P"  "Yb    dP"  "Y8I   dP""""8I   dP"  "Y8ggg I8      8I  ,8" "8P" "8,   dP"  "Y8I 
+#   Y8,           i8'    ,8I  I8   8I   8I   8I  I8'    ,8i  i8'    ,8I  ,8'    8I  i8'    ,8I   I8,    ,8I  I8   8I   8I  i8'    ,8I 
+#   `Yba,,_____, ,d8,   ,d8b,,dP   8I   8I   Yb,,I8 _  ,d8' ,d8,   ,d8I ,dP     Y8,,d8,   ,d8'  ,d8b,  ,d8b,,dP   8I   Yb,,d8,   ,d8b,
+#     `"Y8888888 P"Y8888P"`Y88P'   8I   8I   `Y8PI8 YY88888PP"Y8888P"8888P      `Y8P"Y8888P"    8P'"Y88P"`Y88P'   8I   `Y8P"Y8888P"`Y8
+#                                                I8                ,d8I'                                                              
+#                                                I8              ,dP'8I                                                               
+#                                                I8             ,8"  8I                                                               
+#                                                I8             I8   8I                                                               
+#                                                I8             `8, ,8I                                                               
+#                                                I8              `Y8P"                                                                
+#          ,ggggggg,                                                                                                                  
+#        ,dP""""""Y8b                           ,dPYb,                                                                                
+#        d8'    a  Y8                           IP'`Yb                                                                                
+#        88     "Y8P'                           I8  8I                                                                                
+#        `8baaaa                                I8  8'                                                                                
+#       ,d8P""""         ,gg,   ,gg gg,gggg,    I8 dP    ,ggggg,     ,gggggg,   ,ggg,    ,gggggg,                                     
+#       d8"             d8""8b,dP"  I8P"  "Yb   I8dP    dP"  "Y8ggg  dP""""8I  i8" "8i   dP""""8I                                     
+#       Y8,            dP   ,88"    I8'    ,8i  I8P    i8'    ,8I   ,8'    8I  I8, ,8I  ,8'    8I                                     
+#       `Yba,,_____, ,dP  ,dP"Y8,  ,I8 _  ,d8' ,d8b,_ ,d8,   ,d8'  ,dP     Y8, `YbadP' ,dP     Y8,                                    
+#         `"Y8888888 8"  dP"   "Y88PI8 YY88888P8P'"Y88P"Y8888P"    8P      `Y8888P"Y8888P      `Y8                                    
+#                                   I8                                                                                                
+#                                   I8                                                                                                
+#                                   I8                                                                                                
+#                                   I8                                                                                                
+#                                   I8                                                                                                
+#                                   I8                                                                                                
+
+#     end
+
     
     def welcome
         puts "Welcome to the Campground Explorer!"

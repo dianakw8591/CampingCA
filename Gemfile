@@ -11,3 +11,4 @@ gem "dotenv"
 gem "tty-prompt"
 gem 'tty-table'
 gem 'sanitize'
+gem 'activerecord-reset-pk-sequence'
