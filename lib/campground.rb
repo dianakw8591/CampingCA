@@ -33,6 +33,7 @@ class Campground < ActiveRecord::Base
 
     def set_alert(date_array, user)
         Alert.create(user_id: user.id, campground_id: self.id, start_date: date_array[0], end_date: date_array[1])
+        user.alerts.reload
     end
 
 end

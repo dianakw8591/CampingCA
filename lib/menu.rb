@@ -114,32 +114,6 @@ class Menu
         end
     end
 
-    # def campground_search_menu(camp)
-    #     prompt = TTY::Prompt.new
-    #     puts "#{camp.name}\n\n"
-    #     choices = [
-    #         {name: "View description", value: 1}, #PARSE HTML
-    #         {name: "View availability", value: 2},
-    #         {name: "Return to search", value: 3},
-    #         {name: "View all of #{camp.rec_area.name}'s campgrounds", value: 4},
-    #         {name: "Return to main menu", value: 5}
-    #     ]
-    #     choice = prompt.select("Select an option:", choices)
-    #     puts "\n\n"
-    #     if choice == 1
-    #         puts "#{camp.description}\n\n"
-    #         campground_search_menu(camp)
-    #     elsif choice == 2
-    #         availability_menu(camp)
-    #     elsif choice == 3
-    #         campground_find_by_name_menu
-    #     elsif choice == 4
-    #         view_campgrounds_menu(camp.rec_area)
-    #     else
-    #         main_menu
-    #     end
-    # end
-
     def availability_menu(camp = nil, date_array = [])
         if camp.nil?
             camp = campground_search_by_name_menu
@@ -171,19 +145,6 @@ class Menu
         end
     end
 
-    # def select_campground
-    #     prompt = TTY::Prompt.new
-    #     camp_name = prompt.ask("Enter a campground name to find availability:")
-    #     puts "\n\n"
-    #     camp = Campground.find_by_name(camp_name)
-    #     if camp.nil?
-    #         puts "Hmmm, I don't know that one. Please try again.\n\n"
-    #         self.select_campground
-    #     else
-    #         camp
-    #     end
-    # end
-
     def campground_search_by_name_menu
         prompt = TTY::Prompt.new
         camp_name = prompt.ask("Enter a campground name to search, 'menu' to return to the main menu:")
@@ -204,6 +165,7 @@ class Menu
 
     def get_dates
         start_prompt = TTY::Prompt.new
+        # DEAL WITH DATE HANDLING
         start_date = start_prompt.ask("What day are you arriving?:", convert: :date)
         end_prompt = TTY::Prompt.new
         end_date = end_prompt.ask("What date are you leaving?", convert: :date)
@@ -250,7 +212,8 @@ class Menu
             choices = [
                 {name: "Update an alert", value: 1},
                 {name: "Delete an alert", value: 2},
-                {name: "Return to main menu", value: 3}
+                {name: "Add an alert", value: 3},
+                {name: "Return to main menu", value: 4}
             ]
             choice = prompt.select("Select an option:", choices)
             puts "\n\n"
@@ -258,6 +221,8 @@ class Menu
                 update_alert
             elsif choice == 2
                 delete_alert
+            elsif choice == 3
+                availability_menu
             else
                 main_menu
             end
