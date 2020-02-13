@@ -10,3 +10,4 @@ gem "rest-client"
 gem "dotenv"
 gem "tty-prompt"
 gem 'tty-table'
+gem 'sanitize'

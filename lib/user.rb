@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
     end
 
     def update_profile(menu)
+        puts "#{self.name}, your email is set to #{self.email}\n\n"
         prompt = TTY::Prompt.new
         choices = [
             {name: 'Update name', value: 1},

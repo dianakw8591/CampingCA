@@ -100,7 +100,8 @@ class Menu
         choice = prompt.select("Select an option:", choices)
         puts "\n\n"
         if choice == 1
-            puts "#{camp.description}\n\n"
+            camp.view_description
+            puts "\n\n"
             view_campground_details_menu(camp)
         elsif choice == 2
             availability_menu(camp)

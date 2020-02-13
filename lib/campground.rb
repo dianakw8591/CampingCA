@@ -37,4 +37,8 @@ class Campground < ActiveRecord::Base
         user.alerts.reload
     end
 
+    def view_description
+        puts Sanitize.fragment(description)
+    end
+
 end
