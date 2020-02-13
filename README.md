@@ -42,6 +42,10 @@ A user of Camping CA can:
 
 Contributions are welcome. Feel free to open a pull request or branch from this project.
 
+## Data
+
+Data source: ridb.recreation.gov
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
