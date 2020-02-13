@@ -9,3 +9,4 @@ gem "require_all"
 gem "rest-client"
 gem "dotenv"
 gem "tty-prompt"
+gem 'tty-table'

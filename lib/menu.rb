@@ -176,8 +176,11 @@ class Menu
     def print_availability(camp, start_date, end_date)
         avail_array = camp.check_availability(start_date, end_date)
         puts "Sites available for #{camp.name}:"
-        p avail_array
-        # make this pretty - https://github.com/piotrmurach/tty-table
+        table = TTY::Table.new header: ['Date','Sites Available']
+        avail_array.each do |hash|
+            table << [hash[:date], hash[:avail]]
+        end
+        puts table.render :unicode, alignment: [:center]
         puts "\n\n"
     end
 

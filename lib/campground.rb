@@ -22,7 +22,8 @@ class Campground < ActiveRecord::Base
             date = date.next
         end
         date_range.map do |date|
-            {date => sites_available_on_date(date)}
+            {date: date,
+            avail: sites_available_on_date(date)}
         end
     end
 
