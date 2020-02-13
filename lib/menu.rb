@@ -174,9 +174,11 @@ class Menu
 
     def campground_search_by_name_menu
         prompt = TTY::Prompt.new
-        camp_name = prompt.ask("Enter a campground name to search, 'menu' to return to the main menu:")
+        camp_name = prompt.ask("Enter a campground name to search, 'menu' to return to the main menu:") do |input|
+            input.modify :trim, :up
+        end
         puts "\n\n"
-        if camp_name == "menu"
+        if camp_name == "MENU"
             main_menu
         else
             camp = Campground.find_by_name(camp_name)
@@ -192,18 +194,22 @@ class Menu
 
     def get_dates
         start_prompt = TTY::Prompt.new
-        # DEAL WITH DATE HANDLING
-        start_date = start_prompt.ask("What day are you arriving?:", convert: :date)
+        start_date = start_prompt.ask("Enter your arrival date: (within the next month, MM/DD)", convert: :date)
         end_prompt = TTY::Prompt.new
-        end_date = end_prompt.ask("What date are you leaving?", convert: :date)
+        end_date = end_prompt.ask("Enter your departure date: (within the next month, MM/DD", convert: :date)
         puts "\n\n"
-        [start_date, end_date]
+        if end_date < start_date || end_date > Date.today.next_month
+            puts "Invalid dates. Please try again."
+            get_dates
+        else    
+            [start_date, end_date]
+        end
     end
 
     def print_availability(camp, start_date, end_date)
         avail_array = camp.check_availability(start_date, end_date)
         puts "Sites available for #{camp.name}:"
-        table = TTY::Table.new header: ['Date','Sites Available']
+        table = TTY::Table.new header: ['Date','# Available']
         avail_array.each do |hash|
             table << [hash[:date], hash[:avail]]
         end
