@@ -2,59 +2,47 @@ class Menu
     attr_accessor :user
 
     def run
-        self.welcome
-        user = User.prompt_for_user
-        self.user = user
+        welcome_banner
+        self.user = User.prompt_for_user
         main_menu
     end
 
-#     def welcome_banner
+    def welcome_banner
 
-#        ,gggg,                                                                                                                     
-#      ,88"""Y8b,                                                                                                                  8I 
-#     d8"     `Y8                                                                                                                  8I 
-#    d8'   8b  d8                                                                                                                  8I 
-#   ,8I    "Y88P'                                                                                                                  8I 
-#   I8'             ,gggg,gg   ,ggg,,ggg,,ggg,   gg,gggg,      ,gggg,gg   ,gggggg,    ,ggggg,    gg      gg   ,ggg,,ggg,     ,gggg,8I 
-#   d8             dP"  "Y8I  ,8" "8P" "8P" "8,  I8P"  "Yb    dP"  "Y8I   dP""""8I   dP"  "Y8ggg I8      8I  ,8" "8P" "8,   dP"  "Y8I 
-#   Y8,           i8'    ,8I  I8   8I   8I   8I  I8'    ,8i  i8'    ,8I  ,8'    8I  i8'    ,8I   I8,    ,8I  I8   8I   8I  i8'    ,8I 
-#   `Yba,,_____, ,d8,   ,d8b,,dP   8I   8I   Yb,,I8 _  ,d8' ,d8,   ,d8I ,dP     Y8,,d8,   ,d8'  ,d8b,  ,d8b,,dP   8I   Yb,,d8,   ,d8b,
-#     `"Y8888888 P"Y8888P"`Y88P'   8I   8I   `Y8PI8 YY88888PP"Y8888P"8888P      `Y8P"Y8888P"    8P'"Y88P"`Y88P'   8I   `Y8P"Y8888P"`Y8
-#                                                I8                ,d8I'                                                              
-#                                                I8              ,dP'8I                                                               
-#                                                I8             ,8"  8I                                                               
-#                                                I8             I8   8I                                                               
-#                                                I8             `8, ,8I                                                               
-#                                                I8              `Y8P"                                                                
-#          ,ggggggg,                                                                                                                  
-#        ,dP""""""Y8b                           ,dPYb,                                                                                
-#        d8'    a  Y8                           IP'`Yb                                                                                
-#        88     "Y8P'                           I8  8I                                                                                
-#        `8baaaa                                I8  8'                                                                                
-#       ,d8P""""         ,gg,   ,gg gg,gggg,    I8 dP    ,ggggg,     ,gggggg,   ,ggg,    ,gggggg,                                     
-#       d8"             d8""8b,dP"  I8P"  "Yb   I8dP    dP"  "Y8ggg  dP""""8I  i8" "8i   dP""""8I                                     
-#       Y8,            dP   ,88"    I8'    ,8i  I8P    i8'    ,8I   ,8'    8I  I8, ,8I  ,8'    8I                                     
-#       `Yba,,_____, ,dP  ,dP"Y8,  ,I8 _  ,d8' ,d8b,_ ,d8,   ,d8'  ,dP     Y8, `YbadP' ,dP     Y8,                                    
-#         `"Y8888888 8"  dP"   "Y88PI8 YY88888P8P'"Y88P"Y8888P"    8P      `Y8888P"Y8888P      `Y8                                    
-#                                   I8                                                                                                
-#                                   I8                                                                                                
-#                                   I8                                                                                                
-#                                   I8                                                                                                
-#                                   I8                                                                                                
-#                                   I8                                                                                                
-
-#     end
-
-    
-    def welcome
-        puts "Welcome to the Campground Explorer!"
+        puts "\n\n"
+        puts"     ,gggg, "                                                                            
+        puts"   ,88*Y8b,    "                                                                       
+        puts"  d8*     `Y8      "                                                                     
+        puts" d8'   8b  d8                                             gg   "                       
+        puts",8I    *Y88P'                                             *                     "       
+        puts"I8'             ,gggg,gg   ,ggg,,ggg,,ggg,   gg,gggg,     gg    ,ggg,,ggg,     ,gggg,gg "
+        puts"d8             dP*  *Y8I  ,8* *8P* *8P* *8,  I8P*  *Yb    88   ,8* *8P* *8,   dP*  *Y8I "
+        puts"Y8,           i8'    ,8I  I8   8I   8I   8I  I8'    ,8i   88   I8   8I   8I  i8'    ,8I "
+        puts"`Yba,,_____, ,d8,   ,d8b,,dP   8I   8I   Yb,,I8 _  ,d8' _,88,_,dP   8I   Yb,,d8,   ,d8I "
+        puts"  `*Y8888888 P*Y8888P*`Y88P'   8I   8I   `Y8PI8 YY88888P8P*Y88P'   8I   `Y8P*Y8888P*888"
+        puts"                                             I8                                    ,d8I'"
+        puts"                                             I8                                  ,dP'8I "
+        puts"                                             I8                                 ,8*  8I "
+        puts"                                             I8                                 I8   8I "
+        puts"                                             I8                                 `8, ,8I "
+        puts"                                             I8                                  `Y8P*  "
+        puts"                                                     ,gggg,             ,ggg,           "
+        puts"                                                   ,88*Y8b,            dP*8I      "     
+        puts"                                                  d8*     `Y8         dP   88      "     
+        puts"                                                 d8'   8b  d8        dP    88      "     
+        puts"                                                ,8I    *Y88P'       ,8'    88       "    
+        puts"      Welcome to the Camping CA!                I8'                 d88888888       "    
+        puts"                                                d8            __   ,8*     88         "  
+        puts"    Where you can explore all nine of           Y8,          dP*  ,8P      Y8    "       
+        puts"      California's National Parks!              `Yba,,_____, Yb,_,dP       `8b,    "     
+        puts"                                                  `*Y8888888  *Y8P*         `Y8     "    
         puts "\n\n"
     end
 
     def main_menu
         prompt = TTY::Prompt.new
         choices = [
-            {name: 'Explore recreation areas', value: 1},
+            {name: 'Explore National Parks', value: 1},
             {name: 'Search for campgrounds', value: 2},
             {name: 'Check availability', value: 3},
             {name: 'Manage alerts', value: 4},
@@ -96,7 +84,7 @@ class Menu
         area.view_area
         choices = [
             {name: "View campgrounds", value: 1},
-            {name: "Return to view areas", value: 2},
+            {name: "Return to view parks", value: 2},
             {name: "Return to main menu", value: 3}
         ]
         choice = prompt.select("Select an option:", choices)
