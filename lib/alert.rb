@@ -16,7 +16,4 @@ class Alert < ActiveRecord::Base
         self.campground = camp
         self.save
     end
-
-        
-            
 end

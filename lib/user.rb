@@ -84,6 +84,4 @@ class User < ActiveRecord::Base
             {name: "#{alert.campground.name} from #{alert.start_date} to #{alert.end_date}", value: alert}
         end
     end
-
-
 end

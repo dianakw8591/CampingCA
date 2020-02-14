@@ -63,7 +63,8 @@ class Menu
         elsif choice == 5
             user.update_profile(self)
         elsif choice == 6
-            puts "Goodbye!\n\n"
+            puts "Thanks for exploring! Goodbye!\n\n"
+            exit
         end  
     end
 
@@ -117,7 +118,7 @@ class Menu
         prompt = TTY::Prompt.new
         puts "#{camp.name}\n\n"
         choices = [
-            {name: "View description", value: 1}, #PARSE HTML
+            {name: "View description", value: 1},
             {name: "View availability", value: 2},
             {name: "View more campgrounds of #{camp.rec_area.name}", value: 3},
             {name: "Search for campgrounds by name", value: 4},
@@ -193,16 +194,21 @@ class Menu
 
 
     def get_dates
-        start_prompt = TTY::Prompt.new
-        start_date = start_prompt.ask("Enter your arrival date: (within the next month, MM/DD)", convert: :date)
-        end_prompt = TTY::Prompt.new
-        end_date = end_prompt.ask("Enter your departure date: (within the next month, MM/DD", convert: :date)
-        puts "\n\n"
-        if end_date < start_date || end_date > Date.today.next_month
-            puts "Invalid dates. Please try again."
+        begin
+            start_prompt = TTY::Prompt.new
+            start_date = start_prompt.ask("Enter your arrival date: (within the next month, MM/DD)", convert: :date)
+            end_prompt = TTY::Prompt.new
+            end_date = end_prompt.ask("Enter your departure date: (within the next month, MM/DD", convert: :date)
+            puts "\n\n"
+            if end_date < start_date || end_date > Date.today.next_month
+                puts "Invalid dates. Please try again."
+                get_dates
+            else    
+                [start_date, end_date]
+            end
+        rescue
+            puts "Oops! There was a problem with the date that you entered. Please try again!"
             get_dates
-        else    
-            [start_date, end_date]
         end
     end
 
@@ -215,6 +221,12 @@ class Menu
         end
         puts table.render :unicode, alignment: [:center]
         puts "\n\n"
+        prompt = TTY::Prompt.new
+        open_browser = prompt.yes?("Would you like to open recreation.gov to reserve?")
+        puts "\n\n"
+        if open_browser
+            system("open https://www.recreation.gov/camping/campgrounds/#{camp.official_facility_id}/availability")
+        end
     end
 
 

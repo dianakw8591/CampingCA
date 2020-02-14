@@ -5,14 +5,14 @@ class Campground < ActiveRecord::Base
     has_many :users,  through: :alerts
 
     def self.find_by_name(name)
-        self.find_by(name: name) #NEEDS TO BE CAPITALIZED
+        self.find_by(name: name)
     end
 
     # get data for availability by date
-    def update_availability(start_date, end_date)
-        # query rec.gov for campsites
-        #update availability records in database
-    end
+    # def update_availability(start_date, end_date)
+    #     # query rec.gov for campsites
+    #     #update availability records in database
+    # end
 
     def check_availability(start_date, end_date)
         date_range = []
@@ -40,5 +40,4 @@ class Campground < ActiveRecord::Base
     def view_description
         puts Sanitize.fragment(description)
     end
-
 end
