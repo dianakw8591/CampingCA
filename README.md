@@ -11,7 +11,9 @@ A user of Camping CA can:
 -Search camping availability (currently fake data) given a campground and date range  
 -Set an alert on a given seach that will (theoretically) send an email if camping   becomes available for that search  
 -Update the alert criteria  
--Delete an alert  
+-Delete an alert
+
+See the walkthrough video [here](https://youtu.be/QKiX9MQ7TOE)
 
 ## Installation
 
